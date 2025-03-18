@@ -65,7 +65,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./config/test:/app/config
+      - ./config/test:/app/config/test
       - ./logs:/logs
     depends_on:
       kafka:
@@ -81,7 +81,7 @@ services:
     expose:
       - "8090"
     volumes:
-      - ./config/prod:/app/config
+      - ./config/prod:/app/config/prod
       - ./logs:/logs
     depends_on:
       db:
@@ -97,7 +97,7 @@ services:
     ports:
       - "8100:8100"
     volumes:
-      - ./config/test:/app/config
+      - ./config/test:/app/config/test
       - ./logs:/logs
       - ./data/processing:/app/data/processing
     depends_on:
@@ -113,7 +113,7 @@ services:
     ports:
       - "8110:8110"
     volumes:
-      - ./config/prod:/app/config
+      - ./config/prod:/app/config/prod
       - ./logs:/logs
     depends_on:
       kafka:
