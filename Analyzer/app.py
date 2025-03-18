@@ -46,11 +46,14 @@ def get_booking_events(index):
                 return data, 200
             event_counter += 1
 
+    logger.error(f"No ticket_event found at index {index}!")
+
     return {"message": f"No ticket_event found at index {index}!"}, 404
 
 
 def get_booking_tickets(index):
     """Retrieve a specific ticket booking event from Kafka by index"""
+    logger.info("Retrieving ticket booking event at index %d", index)
     consumer = topic.get_simple_consumer(reset_offset_on_start=True, consumer_timeout_ms=1000)
 
     ticket_counter = 0
@@ -62,11 +65,14 @@ def get_booking_tickets(index):
                 return data, 200
             ticket_counter += 1
 
+    logger.error(f"No event found at index {index}!")
+
     return {"message": f"No event found at index {index}!"}, 404
 
 
 def get_stats():
     """Retrieve statistics for event1 and event2 counts"""
+    logger.info("Retrieving stats")
     consumer = topic.get_simple_consumer(reset_offset_on_start=True, consumer_timeout_ms=1000)
     
     num_event1 = 0
