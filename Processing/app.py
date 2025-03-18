@@ -15,7 +15,7 @@ STORAGE_URL = "http://localhost:8090"
 SERVICE_NAME = "processing"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_CONFIG_PATH = os.path.join(BASE_DIR, "config", "log_conf.yml")
+LOG_CONFIG_PATH = os.path.join(BASE_DIR, "config", "test", "log_conf.yml")
 APP_CONFIG_PATH = os.path.join(BASE_DIR, "config", "processing_conf.yml")
 STATS_PATH = os.path.join(BASE_DIR, "data", "processing", "stats.json")
 
