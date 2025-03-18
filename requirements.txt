@@ -1,0 +1,17 @@
+connexion[flask,uvicorn,swagger-ui]
+
+# Receiver service dependencies
+pykafka
+
+# Storage service dependencies
+sqlalchemy
+mysqlclient
+pykafka
+
+# Processing service dependencies
+httpx
+apscheduler
+
+# Analyzer service dependencies
+httpx
+pykafka

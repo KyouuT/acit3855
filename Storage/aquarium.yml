@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Aquarium API
+  version: 1.0.0
+paths:
+  /booking/attraction:
+    # post:
+    #   summary: book spots on event/attraction
+    #   operationId: app.post_booking_events
+    #   description: Reserve seats for user upon booking and update the system
+    #   requestBody:
+    #     description: Seats to be reserved
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/EventBooking'
+    #   responses:
+    #     '201':
+    #       description: Seat Reserved
+    #     '400':
+    #       description: 'Invalid Request, No More seat available'
+    get:
+      summary: Get total number of events booked
+      operationId: app.get_booking_events
+      description: Get all booked events
+      parameters:
+        - name: start_timestamp
+          in: query
+          description: Start date and time of the event
+          schema:
+            type: string
+            format: date-time
+            example: '2024-10-12 14:30:00'
+        - name: end_timestamp
+          in: query
+          description: End date and time of the event
+          schema:
+            type: string
+            format: date-time
+            example: '2024-10-12 16:30:00'
+      responses:
+        '200':
+          description: All booked events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventBooking'
+  /buy/tickets:
+    # post:
+    #   summary: book entrance ticket/daypass
+    #   operationId: app.post_booking_tickets
+    #   description: Generate ticket/daypass upon successful booking
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/TicketBooking'
+    #     description: The system generates tickets/daypass upon successful purchase
+    #   responses:
+    #     '201':
+    #       description: Ticket Generated
+    #     '400':
+    #       description: Invalid Request
+    get:
+      summary: Get total number of tickets booked
+      operationId: app.get_booking_tickets
+      description: Get all booked tickets
+      parameters:
+        - name: start_timestamp
+          in: query
+          description: Start date and time of the ticket booking
+          schema:
+            type: string
+            format: date-time
+            example: '2024-10-12 14:30:00'
+        - name: end_timestamp
+          in: query
+          description: End date and time of the ticket booking
+          schema:
+            type: string
+            format: date-time
+            example: '2024-10-12 16:30:00'
+      responses:
+        '200':
+          description: All booked tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TicketBooking'
+components:
+  schemas:
+    EventBooking:
+      type: object
+      required:
+        - attraction_id
+        - num_people
+        - start_date
+        - end_date
+      properties:
+        attraction_id:
+          type: string
+        num_people:
+          type: integer
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+    TicketBooking:
+      type: object
+      required:
+        - ticket_id
+        - num_people
+        - date
+        - attraction
+      properties:
+        ticket_id:
+          type: string
+        num_people:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        attraction:
+          type: boolean

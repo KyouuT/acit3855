@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Aquarium API
+  version: 1.0.0
+paths:
+  /booking/attraction:
+    get:
+      summary: Get total number of events booked from history
+      operationId: app.get_booking_events
+      description: Get all booked events from the event store
+      parameters:
+        - name: index
+          in: query
+          description: Index of the first event
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: All booked events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/EventBooking'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Invalid Request'
+
+  /buy/tickets:
+    get:
+      summary: Get total number of tickets booked from history
+      operationId: app.get_booking_tickets
+      description: Get all booked tickets from the event store
+      parameters:
+        - name: index
+          in: query
+          description: gets the ticket at the specified index
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: All booked tickets
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/TicketBooking'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Invalid Request'
+        '404':
+          description: No tickets found
+          
+  /stats:
+    get:
+      summary: Get total number of events and tickets booked
+      operationId: app.get_stats
+      description: Get all booked events and tickets
+      responses:
+        '200':
+          description: All booked events and tickets
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Stats'
+components:
+  schemas:
+    EventBooking:
+      type: object
+      required:
+        - attraction_id
+        - num_people
+        - start_date
+        - end_date
+      properties:
+        attraction_id:
+          type: string
+        num_people:
+          type: integer
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+    TicketBooking:
+      type: object
+      required:
+        - ticket_id
+        - num_people
+        - date
+        - attraction
+      properties:
+        ticket_id:
+          type: string
+        num_people:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        attraction:
+          type: boolean
+    Stats: 
+      required: 
+        - num_ticket
+        - num_event
+      properties: 
+        num_ticket: 
+          type: integer 
+          example: 100 
+        num_event: 
+          type: integer 
+          example: 100

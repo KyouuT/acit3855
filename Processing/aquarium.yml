@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: 1.0.1
+  title: Stats API
+  description: This API provides event stats
+paths:
+  /stats:
+    get:
+      summary: Gets the booking stats
+      operationId: app.get_stats
+      description: Get all booked events and tickets statistics
+      responses:
+        '200':
+          description: Successfully returned a list of all booked events and tickets
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: 'Invalid Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadingStats'
+
+components:
+  schemas:
+    ReadingStats:
+      type: object
+      required:
+        - num_tickets_readings
+        - max_tickets_readings
+        - num_event_readings
+        - max_event_readings
+      properties:
+        num_tickets_readings:
+          type: integer
+          description: The number of tickets readings
+          format: int
+          example: 2
+        max_tickets_readings:
+          type: integer
+          description: The maximum number of tickets readings
+          format: int
+          example: 5
+        num_event_readings:
+          type: integer
+          description: The number of event readings
+          format: int
+          example: 2
+        max_event_readings:
+          type: integer
+          description: The maximum number of event readings
+          format: int
+          example: 5

@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  version: 1.0.1
+  title: Aquarium
+  description: Ticket and Event Booking System
+paths:
+  /booking/attraction:
+    post:
+      summary: book spots on event/attraction
+      operationId: app.post_booking_events
+      description: Reserve seats for user upon booking and update the system
+      requestBody:
+        description: Seats to be reserved
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventBooking'
+      responses:
+        '201':
+          description: Seat Reserved
+        '400':
+          description: 'Invalid Request, No More seat avaialable'
+      
+  /buy/tickets:
+    post:
+      summary: book entrance ticket/daypass
+      operationId: app.post_booking_tickets
+      description: Generate ticket/daypass upon succesfull booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketBooking'
+        description: The system generate tickets/daypass upon succesfull purchase
+      responses:
+        '201':
+          description: Ticket Generated
+        '400':
+          description: Invalid Request
+
+components:
+  schemas:
+    TicketBooking:
+      type: object
+      required:
+        - ticket_id
+        - num_people
+        - date
+        - attraction
+      properties:
+        ticket_id:
+          type: string
+          description: The ticket ID for each unique ticket
+          format: uuid
+          example: S1900f12ree
+        num_people:
+          type: integer
+          description: The number of people included during booking
+          format: uuid
+          example: 2
+        date:
+          type: string
+          description: Scheduled entry date
+          format: date
+          example: '2024-10-12'
+        attraction:
+          type: boolean
+          description: Include attraction during booking
+          format: uuid
+          example: true
+          
+    EventBooking:
+      type: object
+      required:
+        - attraction_id
+        - num_people
+        - start_date
+        - end_date
+      properties:
+        attraction_id:
+          type: string
+          format: uuid
+          description: The attraction ID used for each unique attraction ticket
+          example: S193af23r
+        num_people:
+          type: integer
+          description: The number of people included in the ticket
+          example: 2
+        start_date:
+          type: string
+          format: date-time
+          description: Attraction start date and time
+          example: '2024-10-12 14:30'
+        end_date:
+          type: string
+          format: date-time
+          description: Attraction date and time
+          example: '2024-10-12 16:30'

@@ -1,0 +1,9 @@
+version: 1
+datastore: 
+  filename: stats.json
+scheduler:
+  interval: 15
+ticket: 
+  url: http://storage:8090/buy/tickets
+attraction: 
+  url: http://storage:8090/booking/attraction
