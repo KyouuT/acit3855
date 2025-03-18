@@ -1,0 +1,75 @@
+- name: Deploy microservices on cloud VM
+  hosts: cloud_vm
+  become: true  # Run commands as root
+  vars:
+    project_dir: /opt/my_project
+    git_repo: "git@github.com:KyouuT/acit3855.git"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+  tasks:
+    - name: Ensure required packages are installed
+      apt:
+        name:
+          - git
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure project directory exists
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Add GitHub to known hosts
+      known_hosts:
+        name: github.com
+        key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
+
+    - name: Clone or update project repo
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ project_dir }}"
+        version: main
+        force: yes
+        key_file: "/home/ubuntu/.ssh/id_rsa"
+
+    - name: Set execute permissions on Kafka script
+      file:
+        path: "{{ project_dir }}/script/reset-kafka.sh"
+        mode: '0755'
+
+    - name: Create required directories
+      file:
+        path: "{{ project_dir }}/{{ item }}"
+        state: directory
+        mode: '0777'
+      loop:
+        - logs
+        - data/kafka
+        - data/db
+        - data/processing
+        - config/prod
+
+    - name: Ensure Docker Compose services are running
+      command:
+        chdir: "{{ project_dir }}"
+        cmd: docker compose up -d --build
+
+    - name: Wait for services to be healthy
+      wait_for:
+        timeout: 30
+
+    - name: Run jMeter test
+      command:
+        chdir: "{{ project_dir }}"
+        cmd: jmeter -n -t test_plan.jmx
+      ignore_errors: yes  # Don't fail the entire playbook if jMeter fails

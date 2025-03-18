@@ -2,3 +2,5 @@
 /data
 /config/prod
 /materials
+deploy.yml
+hosts.ini
