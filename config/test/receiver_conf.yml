@@ -4,6 +4,6 @@ ticket:
 attraction: 
   url: http://ec2-54-201-123-248.us-west-2.compute.amazonaws.com:8090/booking/attraction
 events:
-  hostname: ec2-54-201-123-248.us-west-2.compute.amazonaws.com
-  port: 9092
+  hostname: kafka
+  port: 29092
   topic: events
