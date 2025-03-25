@@ -23,6 +23,12 @@
         state: present
       when: ansible_os_family == "Debian"
 
+    - name: Install jMeter
+      apt:
+        name: jmeter
+        state: present
+      when: ansible_os_family == "Debian"
+
     - name: Ensure project directory exists
       file:
         path: "{{ project_dir }}"
@@ -71,5 +77,6 @@
     - name: Run jMeter test
       command:
         chdir: "{{ project_dir }}"
+        cmd: jmeter.save.saveservice.script_wrapper=false
         cmd: jmeter -n -t test_plan.jmx
       ignore_errors: yes  # Don't fail the entire playbook if jMeter fails
