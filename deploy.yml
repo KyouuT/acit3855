@@ -2,7 +2,7 @@
   hosts: cloud_vm
   become: true  # Run commands as root
   vars:
-    project_dir: /opt/my_project
+    project_dir: /home/ubuntu
     git_repo: "git@github.com:KyouuT/acit3855.git"
 
   tasks:
