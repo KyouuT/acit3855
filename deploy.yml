@@ -48,24 +48,6 @@
         force: yes
         key_file: "/home/ubuntu/.ssh/id_rsa"
 
-    - name: Ensure config/prod directory exists on the VM
-      file:
-        path: "{{ project_dir }}/config/prod"
-        state: directory
-        mode: '0777'
-
-    - name: Copy storage_conf.yml to the VM
-      copy:
-        src: /config/prod/storage_conf.yml
-        dest: "{{ project_dir }}/config/prod/storage_conf.yml"
-        mode: '0644'
-
-    - name: Copy analyzer_conf.yml to the VM
-      copy:
-        src: /config/prod/analyzer_conf.yml
-        dest: "{{ project_dir }}/config/prod/analyzer_conf.yml"
-        mode: '0644'
-
     - name: Set execute permissions on Kafka script
       file:
         path: "{{ project_dir }}do/script/reset-kafka.sh"
