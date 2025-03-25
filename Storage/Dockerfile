@@ -18,6 +18,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . /app
 
 # Change ownership to a non-privileged user
+RUN mkdir -p /config/prod && chmod -R 777 /config/prod
 RUN chown -R nobody:nogroup /app
 
 # Switch to non-privileged user
