@@ -1,0 +1,11 @@
+version: 1
+datastore: 
+  user: juan
+  password: Jt211313! 
+  hostname: db-mysql
+  port: 3306 
+  db: Aquarium
+events: 
+  hostname: kafka
+  port: 29092 
+  topic: events
