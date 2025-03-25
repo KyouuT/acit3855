@@ -23,11 +23,11 @@
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: Install jMeter
-      apt:
-        name: jmeter
-        state: present
-      when: ansible_os_family == "Debian"
+    # - name: Install jMeter
+    #   apt:
+    #     name: jmeter
+    #     state: present
+    #   when: ansible_os_family == "Debian"
 
     - name: Ensure project directory exists
       file:

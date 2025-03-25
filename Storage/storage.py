@@ -7,9 +7,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 APP_CONFIG_PATH = os.path.join(BASE_DIR, "config", "prod", "storage_conf.yml")
 
 with open(APP_CONFIG_PATH, "r") as f:
-    app_config = yaml.safe_load(f.read())
+    APP_CONFIG = yaml.safe_load(f.read())
 
-data=app_config["datastore"]
+data=APP_CONFIG["datastore"]
 
 engine = create_engine(f'mysql://{data["user"]}:{data["password"]}@{data["hostname"]}/{data["db"]}') 
 
