@@ -26,7 +26,7 @@ services:
     volumes: 
       - ./data/kafka:/kafka
       - ./script:/app/script
-    entrypoint: ["/bin/bash", "-c", "/app/script/reset-kafka.sh"]
+    entrypoint: ["/bin/bash", "-c", "chmod +x /app/script/reset-kafka.sh && /app/script/reset-kafka.sh"]
     healthcheck:
       test: ["CMD", "kafka-topics.sh", "--list", "--bootstrap-server", "kafka:29092"]
       interval: 30s
