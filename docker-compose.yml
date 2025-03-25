@@ -11,7 +11,7 @@ services:
   kafka: 
     container_name: kafka
     image: wurstmeister/kafka 
-    command: [start-kafka.sh] 
+    command: ["/bin/bash", "-c", "chmod +x /app/script/reset-kafka.sh && /app/script/reset-kafka.sh"] 
     expose: 
       - "29092" 
     hostname: kafka 
@@ -26,7 +26,7 @@ services:
     volumes: 
       - ./data/kafka:/kafka
       - ./script:/app/script
-    entrypoint: ["/bin/bash", "-c", "chmod +x /app/script/reset-kafka.sh && /app/script/reset-kafka.sh"]
+    # entrypoint: ["/bin/bash", "-c", "chmod +x /app/script/reset-kafka.sh && /app/script/reset-kafka.sh"]
     healthcheck:
       test: ["CMD", "kafka-topics.sh", "--list", "--bootstrap-server", "kafka:29092"]
       interval: 30s
@@ -81,7 +81,7 @@ services:
     expose:
       - "8090"
     volumes:
-      - ./config/prod:/app/config/prod\
+      - ./config/prod:/app/config/prod
       - ./config/test:/app/config/test
       - ./logs:/logs
     depends_on:
