@@ -81,7 +81,8 @@ services:
     expose:
       - "8090"
     volumes:
-      - ./config/prod:/app/config/prod
+      - ./config/prod:/app/config/prod\
+      - ./config/test:/app/config/test
       - ./logs:/logs
     depends_on:
       db:
@@ -114,6 +115,7 @@ services:
       - "8110:8110"
     volumes:
       - ./config/prod:/app/config/prod
+      - ./config/test:/app/config/test
       - ./logs:/logs
     depends_on:
       kafka:
