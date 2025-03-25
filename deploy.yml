@@ -73,7 +73,7 @@
 
     - name: Wait for Kafka to be ready
       wait_for:
-        host: "kafka"
+        host: "ec2-54-201-123-248.us-west-2.compute.amazonaws.com"
         port: 29092
         state: started
         timeout: 60
