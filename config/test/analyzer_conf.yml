@@ -6,6 +6,6 @@ datastore:
   port: 3306 
   db: Aquarium
 events: 
-  hostname: kafka
-  port: 29092 
+  hostname: http://ec2-54-201-123-248.us-west-2.compute.amazonaws.com/
+  port: 9092 
   topic: events
