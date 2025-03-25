@@ -68,6 +68,7 @@
     - name: Ensure Docker Compose services are running
       command:
         chdir: "{{ project_dir }}"
+        cmd: docker compose down -v
         cmd: docker compose up -d --build
 
     - name: Wait for services to be healthy
