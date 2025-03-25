@@ -1,9 +1,9 @@
 version: 1
 ticket: 
-  url: http://storage:8090/buy/tickets
+  url: http://ec2-54-201-123-248.us-west-2.compute.amazonaws.come:8090/buy/tickets
 attraction: 
-  url: http://storage:8090/booking/attraction
+  url: http://ec2-54-201-123-248.us-west-2.compute.amazonaws.com:8090/booking/attraction
 events:
-  hostname: kafka
-  port: 29092
+  hostname: ec2-54-201-123-248.us-west-2.compute.amazonaws.com
+  port: 9092
   topic: events
