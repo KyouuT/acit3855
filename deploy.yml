@@ -71,6 +71,14 @@
         cmd: docker compose down -v
         cmd: docker compose up -d --build
 
+    - name: Wait for Kafka to be ready
+      wait_for:
+        host: "kafka"
+        port: 29092
+        state: started
+        timeout: 60
+        delay: 10
+
     - name: Wait for services to be healthy
       wait_for:
         timeout: 30
