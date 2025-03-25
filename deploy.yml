@@ -50,7 +50,7 @@
 
     - name: Set execute permissions on Kafka script
       file:
-        path: "{{ project_dir }}do/script/reset-kafka.sh"
+        path: "{{ project_dir }}/script/reset-kafka.sh"
         mode: '0755'
 
     - name: Create required directories
