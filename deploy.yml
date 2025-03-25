@@ -46,7 +46,7 @@
         dest: "{{ project_dir }}"
         version: main
         force: yes
-        key_file: "~/.ssh/id_rsa"
+        key_file: "/home/ubuntu/.ssh/id_rsa"
 
     - name: Set execute permissions on Kafka script
       file:
