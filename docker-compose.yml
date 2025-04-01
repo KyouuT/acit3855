@@ -62,6 +62,7 @@ services:
     build:
       context: Receiver
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "8080:8080"
     volumes:
@@ -78,6 +79,7 @@ services:
     build:
       context: Storage
       dockerfile: Dockerfile
+    restart: always  
     expose:
       - "8090"
     volumes:
@@ -95,6 +97,7 @@ services:
     build:
       context: Processing
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "8100:8100"
     volumes:
@@ -111,6 +114,7 @@ services:
     build:
       context: Analyzer
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "8110:8110"
     volumes:
