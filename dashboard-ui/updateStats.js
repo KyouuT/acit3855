@@ -3,8 +3,8 @@
 const PROCESSING_STATS_API_URL = "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8100/stats"
 const ANALYZER_API_URL = {
     stats: "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8110/stats",
-    events: "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8110/booking/attraction",
-    tickets: "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8110/buy/tickets"
+    events: "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8110/booking/attraction?index=25",
+    tickets: "http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8110/buy/tickets?index=25"
 }
 
 // This function fetches and updates the general statistics
