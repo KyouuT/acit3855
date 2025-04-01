@@ -128,7 +128,7 @@ services:
     container_name: dashboard-ui
     restart: always
     ports:
-      - 3000:3000"
+      - "8200:80"
     volumes:
       - ./dashboard-ui/index.html:/usr/share/nginx/html/index.html
       - ./dashboard-ui/style.css:/usr/share/nginx/html/style.css
