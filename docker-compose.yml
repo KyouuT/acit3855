@@ -13,7 +13,7 @@ services:
     image: wurstmeister/kafka 
     command: [start-kafka.sh] 
     expose: 
-      - "9092:29092" 
+      - "29092" 
     hostname: kafka 
     environment: 
       KAFKA_CREATE_TOPICS: "events:1:1" 
