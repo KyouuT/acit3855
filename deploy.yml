@@ -70,3 +70,7 @@
         chdir: "{{ project_dir }}"
         cmd: docker compose down -v
         cmd: docker compose up -d --build
+
+    - name: Wait for services to be healthy
+      wait_for:
+        timeout: 30
