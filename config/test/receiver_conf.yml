@@ -1,8 +1,8 @@
 version: 1
 ticket: 
-  url: http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8090/buy/tickets
+  url: http://ec2-44-246-37-138.us-west-2.compute.amazonaws.com:8090/buy/tickets
 attraction: 
-  url: http://ec2-34-217-15-207.us-west-2.compute.amazonaws.com:8090/booking/attraction
+  url: http://ec2-44-246-37-138.us-west-2.compute.amazonaws.com:8090/booking/attraction
 events:
   hostname: kafka
   port: 29092
