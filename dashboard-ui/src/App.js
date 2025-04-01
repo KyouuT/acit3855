@@ -1,7 +1,7 @@
 import logo from './logo.jpg';
 import './App.css';
 
-import EndpointAudit from './components/EndpointAnalyzer'
+import EndpointAnalyzer from './components/EndpointAnalyzer'
 import AppStats from './components/AppStats'
 
 function App() {
