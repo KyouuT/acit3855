@@ -1,6 +1,7 @@
-FROM node:13.12.0-alpine 
-# Set working directory 
-WORKDIR /app 
+FROM nginx:alpine
 
-# Start app 
-CMD ["npm", "start"]
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
+# Remove default Nginx static files
+RUN rm -rf /usr/share/nginx/html/*
