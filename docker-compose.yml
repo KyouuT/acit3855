@@ -124,15 +124,16 @@ services:
       - service
 
   dashboard-ui:
+    image: nginx:alpine
     container_name: dashboard-ui
-    build:
-      context: dashboard-ui
-      dockerfile: Dockerfile
+    restart: always
     ports:
-      - "3000:3000"
+      - "8080:80"
     volumes:
-      - ./config/test:/app/config/test
-      - ./logs:/logs
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./style.css:/usr/share/nginx/html/style.css
+      - ./updateStats.js:/usr/share/nginx/html/updateStats.js
+    command: ["nginx", "-g", "daemon off;"]
     depends_on:
       kafka:
         condition: service_healthy
