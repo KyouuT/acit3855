@@ -129,10 +129,6 @@ services:
     restart: always
     ports:
       - "8200:80"
-    volumes:
-      - ./dashboard-ui/index.html:/usr/share/nginx/html/index.html
-      - ./dashboard-ui/style.css:/usr/share/nginx/html/style.css
-      - ./dashboard-ui/updateStats.js:/usr/share/nginx/html/updateStats.js
     command: ["nginx", "-g", "daemon off;"]
     depends_on:
       kafka:
