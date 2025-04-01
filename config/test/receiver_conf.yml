@@ -5,5 +5,5 @@ attraction:
   url: http://ec2-44-246-37-138.us-west-2.compute.amazonaws.com:8090/booking/attraction
 events:
   hostname: kafka
-  port: 29092
+  port: 9092
   topic: events
