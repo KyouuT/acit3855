@@ -130,9 +130,9 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html
-      - ./style.css:/usr/share/nginx/html/style.css
-      - ./updateStats.js:/usr/share/nginx/html/updateStats.js
+      - ./dashboard-ui/index.html:/usr/share/nginx/html/index.html
+      - ./dashboard-ui/style.css:/usr/share/nginx/html/style.css
+      - ./dashboard-ui/updateStats.js:/usr/share/nginx/html/updateStats.js
     command: ["nginx", "-g", "daemon off;"]
     depends_on:
       kafka:
