@@ -132,9 +132,10 @@ services:
     build:
       context: dashboard-ui
       dockerfile: Dockerfile
-    restart: always
     ports:
       - "8200:80"
+    volumes:
+      - ./dashboard-ui/:/usr/share/nginx/html
     depends_on:
       kafka:
         condition: service_healthy
