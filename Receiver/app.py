@@ -10,6 +10,11 @@ from pykafka import KafkaClient
 import json
 import os
 
+app = connexion.FlaskApp(__name__, specification_dir='.')
+if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes": 
+    app.add_middleware(...) # Set up '*' CORS headers when `CORS_ALLOW_ALL` is 'yes'
+app.add_api('aquarium.yml', base_path="/receiver", strict_validation=True, validate_responses=True)
+
 STORAGE_URL = "http://localhost:8090"
 
 SERVICE_NAME = "receiver"
@@ -86,8 +91,6 @@ def post_booking_events(body):
     # return update_event_data("event", body)
     return produce_kafka_event("event", body)
 
-app = connexion.FlaskApp(__name__, specification_dir='.')
-app.add_api('aquarium.yml', strict_validation=True, validate_responses=True)
 
 if __name__ == '__main__':
     app.run(port=8080, host="0.0.0.0")

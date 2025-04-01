@@ -1,6 +1,8 @@
 # Use an official Nginx image as the base
 FROM nginx:alpine
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy the project files to the Nginx HTML directory
 COPY . /usr/share/nginx/html
 

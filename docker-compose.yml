@@ -62,6 +62,8 @@ services:
     build:
       context: Receiver
       dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL= no
     restart: always
     ports:
       - "8080:8080"
@@ -79,6 +81,8 @@ services:
     build:
       context: Storage
       dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL= no
     restart: always  
     expose:
       - "8090"
@@ -97,6 +101,8 @@ services:
     build:
       context: Processing
       dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL= no
     restart: always
     ports:
       - "8100:8100"
@@ -114,6 +120,8 @@ services:
     build:
       context: Analyzer
       dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL= no
     restart: always
     ports:
       - "8110:8110"

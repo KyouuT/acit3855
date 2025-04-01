@@ -13,7 +13,9 @@ from starlette.middleware.cors import CORSMiddleware
 
 # API Setup
 app = connexion.FlaskApp(__name__, specification_dir='.')
-app.add_api('aquarium.yml', strict_validation=True, validate_responses=True)
+if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes": 
+    app.add_middleware(...) # Set up '*' CORS headers when `CORS_ALLOW_ALL` is 'yes'
+app.add_api('aquarium.yml', base_path="/analyzer", strict_validation=True, validate_responses=True)
 app.add_middleware( 
     CORSMiddleware, 
     position=MiddlewarePosition.BEFORE_EXCEPTION, 
