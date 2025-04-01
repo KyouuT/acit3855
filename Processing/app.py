@@ -9,6 +9,20 @@ import logging.config
 from apscheduler.schedulers.background import BackgroundScheduler
 import os
 import json
+from connexion.middleware import MiddlewarePosition 
+from starlette.middleware.cors import CORSMiddleware 
+
+# API Setup
+app = connexion.FlaskApp(__name__, specification_dir='.')
+app.add_api('aquarium.yml', strict_validation=True, validate_responses=True)
+app.add_middleware( 
+    CORSMiddleware, 
+    position=MiddlewarePosition.BEFORE_EXCEPTION, 
+    allow_origins=["*"], 
+    allow_credentials=True, 
+    allow_methods=["*"], 
+    allow_headers=["*"], 
+)
 
 STORAGE_URL = "http://localhost:8090"
 
@@ -144,9 +158,6 @@ def init_scheduler():
     sched = BackgroundScheduler(daemon=True)
     sched.add_job(populate_stats, 'interval', seconds=APP_CONFIG['scheduler']['interval'])
     sched.start()
-
-app = connexion.FlaskApp(__name__, specification_dir='.')
-app.add_api('aquarium.yml', strict_validation=True, validate_responses=True)
 
 if __name__ == '__main__':
     init_scheduler()

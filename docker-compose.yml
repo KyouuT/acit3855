@@ -123,6 +123,22 @@ services:
     networks:
       - service
 
+  dashboard-ui:
+    container_name: dashboard-ui
+    build:
+      context: dashboard-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/test:/app/config/test
+      - ./logs:/logs
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - service
+
 volumes:
   my-db:
 
