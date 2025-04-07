@@ -1,6 +1,6 @@
 /* UPDATE THESE VALUES TO MATCH YOUR SETUP */
 
-const PROCESSING_STATS_API_URL = "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/processing"
+const PROCESSING_STATS_API_URL = "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/processing/stats"
 const ANALYZER_API_URL = {
     stats: "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/analyzer/stats",
     events: "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/analyzer/booking/attraction?index=25",
