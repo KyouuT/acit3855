@@ -65,8 +65,8 @@ services:
     environment:
       CORS_ALLOW_ALL: yes
     restart: always
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     volumes:
       - ./config/test:/app/config/test
       - ./logs:/logs
@@ -104,8 +104,8 @@ services:
     environment:
       CORS_ALLOW_ALL: yes
     restart: always
-    ports:
-      - "8100:8100"
+    expose:
+      - "8100"
     volumes:
       - ./config/test:/app/config/test
       - ./logs:/logs
@@ -123,8 +123,8 @@ services:
     environment:
       CORS_ALLOW_ALL: yes
     restart: always
-    ports:
-      - "8110:8110"
+    expose:
+      - "8110"
     volumes:
       - ./config/prod:/app/config/prod
       - ./config/test:/app/config/test
@@ -140,13 +140,25 @@ services:
     build:
       context: dashboard-ui
       dockerfile: Dockerfile
+    expose:
+      - "80"
+    networks:
+      - service
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
     ports:
-      - "8200:80"
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./dashboard-ui:/usr/share/nginx/html
     depends_on:
       - receiver
       - storage
       - processing
       - analyzer
+      - dashboard-ui
     networks:
       - service
 
