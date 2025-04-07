@@ -63,7 +63,7 @@ services:
       context: Receiver
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     ports:
       - "8080:8080"
@@ -82,7 +82,7 @@ services:
       context: Storage
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always  
     expose:
       - "8090"
@@ -102,7 +102,7 @@ services:
       context: Processing
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     ports:
       - "8100:8100"
@@ -121,7 +121,7 @@ services:
       context: Analyzer
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     ports:
       - "8110:8110"
@@ -143,8 +143,10 @@ services:
     ports:
       - "8200:80"
     depends_on:
-      kafka:
-        condition: service_healthy
+      - receiver
+      - storage
+      - processing
+      - analyzer
     networks:
       - service
 
