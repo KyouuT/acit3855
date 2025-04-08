@@ -94,7 +94,7 @@ def get_list():
     for msg in consumer:
         data = json.loads(msg.value.decode("utf-8"))
         print(data)
-        if "event_id" in data and "trace_id" in data:
+        if "event_id" in data['payload'] and "trace_id" in data['payload']:
             result.append({
                 "event_id": data["event_id"],
                 "trace_id": data["trace_id"],
