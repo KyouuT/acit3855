@@ -4,6 +4,6 @@ datastore:
 scheduler:
   interval: 15
 ticket: 
-  url: http://storage/storage
+  url: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage
 attraction: 
-  url: http://storage/storage
+  url: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage
