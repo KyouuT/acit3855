@@ -48,8 +48,8 @@ components:
     Checks:
       required:
       - counts
-      - not_in_db
-      - not_in_queue
+      - missing_in_db
+      - missing_in_queue
       - last_updated
       type: object
       properties:
