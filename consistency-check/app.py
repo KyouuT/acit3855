@@ -61,8 +61,8 @@ def run_consistency_checks():
     analyzer_count_data = analyzer_counts.json() if analyzer_counts.status_code == 200 else {"error": "unavailable"}
     storage_count_data = storage_counts.json() if storage_counts.status_code == 200 else {"error": "unavailable"}
     
-    analyzer_set = {(x["event_id"], x["trace_id"]) for x in a_ids}
-    storage_set = {(x["event_id"], x["trace_id"]) for x in s_ids}
+    analyzer_set = {(x["id"], x["trace_id"]) for x in a_ids}
+    storage_set = {(x["id"], x["trace_id"]) for x in s_ids}
 
     check_file = "./data/consistency/check.json"
     default_check = {
@@ -84,13 +84,15 @@ def run_consistency_checks():
 
     missing_in_db = []
     for eid, tid in analyzer_set - storage_set:
-        found = next((x for x in a_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
-        if found: missing_in_db.append(found)
+        found = next((x for x in a_ids if x["id"] == eid and x["trace_id"] == tid), None)
+        if found:
+            missing_in_db.append(found)
 
     missing_in_queue = []
     for eid, tid in storage_set - analyzer_set:
-        found = next((x for x in s_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
-        if found: missing_in_queue.append(found)
+        found = next((x for x in s_ids if x["id"] == eid and x["trace_id"] == tid), None)
+        if found:
+            missing_in_queue.append(found)
 
     results = {
         "last_updated": datetime.utcnow().isoformat() + "Z",
