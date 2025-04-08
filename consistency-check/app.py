@@ -106,7 +106,7 @@ def get_checks():
             stats = json.load(f)
     else:
         logger.error("consistency check do not exist")
-        return {"message": "consistency checkdo not exist"}, 404
+        return {"message": "consistency check do not exist"}, 404
     
     logger.debug(f"consistency check: {stats}")
     logger.info("Request for consistency check completed")
