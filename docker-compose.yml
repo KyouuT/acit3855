@@ -62,7 +62,7 @@ services:
       context: Receiver
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     expose:
       - "8080"
@@ -80,7 +80,7 @@ services:
       context: Storage
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always  
     expose:
       - "8090"
@@ -99,7 +99,7 @@ services:
       context: Processing
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     expose:
       - "8100"
@@ -117,7 +117,7 @@ services:
       context: Analyzer
       dockerfile: Dockerfile
     environment:
-      CORS_ALLOW_ALL: no
+      CORS_ALLOW_ALL: yes
     restart: always
     expose:
       - "8110"

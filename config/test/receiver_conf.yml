@@ -1,8 +1,8 @@
 version: 1
 ticket: 
-  url: http://storage/storage
+  url: http://storage:8090/storage/buy/tickets
 attraction: 
-  url: http://storage/storage
+  url: http://storage:8090/storage/booking/attraction
 events:
   hostname: kafka
   port: 29092
