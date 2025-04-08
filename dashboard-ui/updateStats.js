@@ -64,7 +64,10 @@ const runConsistencyCheck = () => {
 }
 
 // Add event listener to the button
-document.getElementById("run-consistency-check-btn").addEventListener("click", runConsistencyCheck);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("run-consistency-check-btn").addEventListener("click", runConsistencyCheck);
+});
+
 
 
 document.addEventListener('DOMContentLoaded', setup)
