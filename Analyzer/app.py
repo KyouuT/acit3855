@@ -93,12 +93,21 @@ def get_list():
 
     for msg in consumer:
         data = json.loads(msg.value.decode("utf-8"))
-        print(data)
-        if "event_id" in data['payload'] and "trace_id" in data['payload']:
+        payload = data.get("payload", {})
+        event_type = data.get("type")
+
+        # Determine ID key based on event type
+        if event_type == "ticket" and "ticket_id" in payload and "trace_id" in payload:
             result.append({
-                "event_id": data["event_id"],
-                "trace_id": data["trace_id"],
-                "type": data["type"]
+                "id": payload["ticket_id"],
+                "trace_id": payload["trace_id"],
+                "type": event_type
+            })
+        elif event_type == "event" and "attraction_id" in payload and "trace_id" in payload:
+            result.append({
+                "id": payload["attraction_id"],
+                "trace_id": payload["trace_id"],
+                "type": event_type
             })
 
     logger.info(f"Found {len(result)} total events/tickets with trace IDs")
