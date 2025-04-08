@@ -53,10 +53,12 @@ def run_consistency_checks():
     storage_ids = httpx.get(f"{APP_CONFIG['url']['storage_ids']}")
 
     # Build dictionaries for comparison
-    analyzer_ids= analyzer_ids.json()
-    storage_ids = storage_ids.json()
-    analyzer_set = {(x["event_id"], x["trace_id"]) for x in analyzer_ids}
-    storage_set = {(x["event_id"], x["trace_id"]) for x in storage_ids}
+    if analyzer_ids.status_code == 200:
+        a_ids = analyzer_ids.json()
+    if storage_ids.status_code == 200:
+        s_ids = storage_ids.json()
+    analyzer_set = {(x["event_id"], x["trace_id"]) for x in a_ids}
+    storage_set = {(x["event_id"], x["trace_id"]) for x in s_ids}
 
     check_file = "./data/consistency/check.json"
 
