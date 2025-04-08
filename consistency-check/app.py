@@ -64,12 +64,12 @@ def run_consistency_checks():
 
     missing_in_db = []
     for eid, tid in analyzer_set - storage_set:
-        found = next((x for x in analyzer_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
+        found = next((x for x in a_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
         if found: missing_in_db.append(found)
 
     missing_in_queue = []
     for eid, tid in storage_set - analyzer_set:
-        found = next((x for x in storage_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
+        found = next((x for x in s_ids if x["event_id"] == eid and x["trace_id"] == tid), None)
         if found: missing_in_queue.append(found)
 
     results = {
