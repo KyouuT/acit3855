@@ -24,7 +24,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT 
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 
     volumes: 
-      - ./data/kafka:/kafka
+      # - ./data/kafka:/kafka
       - ./script:/app/script
     entrypoint: ["/bin/bash", "-c", "chmod +x /app/script/reset-kafka.sh && /app/script/reset-kafka.sh"]
     healthcheck:
@@ -52,8 +52,8 @@ services:
       retries: 5 
     expose: 
       - "3306"
-    volumes:
-      - ./data/db:/var/lib/mysql
+    # volumes:
+      # - ./data/db:/var/lib/mysql
     networks:
       - service
 
