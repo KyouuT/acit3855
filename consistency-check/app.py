@@ -1,14 +1,26 @@
 import requests, json, time, logging
 from datetime import datetime
 from flask import Flask, jsonify
-from flask_cors import CORS
 import os
 import yaml
 import logging.config
+import connexion
+from connexion.middleware import MiddlewarePosition 
+from starlette.middleware.cors import CORSMiddleware 
 
-app = Flask(__name__)
-CORS(app)
-
+# API Setup
+app = connexion.FlaskApp(__name__, specification_dir='.')
+app.add_api('consistency_check.yml', base_path="/consistency", strict_validation=True, validate_responses=True)
+if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes": 
+    app.add_middleware( 
+        CORSMiddleware, 
+        position=MiddlewarePosition.BEFORE_EXCEPTION, 
+        allow_origins=["*"], 
+        allow_credentials=True, 
+        allow_methods=["*"], 
+        allow_headers=["*"], 
+    )
+    
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_CONFIG_PATH = os.path.join(BASE_DIR, "config", "test", "log_conf.yml")
 APP_CONFIG_PATH = os.path.join(BASE_DIR, "config", "test", "consistency_conf.yml")
@@ -33,7 +45,6 @@ def fetch_json(url):
     res.raise_for_status()
     return res.json()
 
-@app.route("/update", methods=["POST"])
 def run_check():
     logger.info("Starting consistency check...")
     start = time.time()
@@ -81,10 +92,12 @@ def run_check():
 
     return jsonify({"processing_time_ms": processing_time_ms}), 200
 
-@app.route("/checks", methods=["GET"])
 def get_last_check():
     try:
         with open(CHECK_PATH, "r") as f:
             return jsonify(json.load(f)), 200
     except FileNotFoundError:
         return jsonify({"message": "No checks have been run yet"}), 404
+
+if __name__ == '__main__':
+    app.run(port=8120, host="0.0.0.0")
