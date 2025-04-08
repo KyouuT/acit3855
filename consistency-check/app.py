@@ -62,7 +62,7 @@ def run_consistency_checks():
     storage_count_data = storage_counts.json() if storage_counts.status_code == 200 else {"error": "unavailable"}
     
     analyzer_set = {(x["id"], x["trace_id"]) for x in a_ids}
-    storage_set = {(x["id"], x["trace_id"]) for x in s_ids}
+    storage_set = {(x["event_id"], x["trace_id"]) for x in s_ids}
 
     check_file = "./data/consistency/check.json"
     default_check = {
