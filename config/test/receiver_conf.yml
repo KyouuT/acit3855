@@ -1,8 +1,8 @@
 version: 1
 ticket: 
-  url: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage
+  url: http://storage/storage
 attraction: 
-  url: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage
+  url: http://storage/storage
 events:
   hostname: kafka
   port: 29092
