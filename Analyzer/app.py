@@ -93,10 +93,12 @@ def get_list():
 
     for msg in consumer:
         data = json.loads(msg.value.decode("utf-8"))
+        print(data)
         if "event_id" in data and "trace_id" in data:
             result.append({
                 "event_id": data["event_id"],
-                "trace_id": data["trace_id"]
+                "trace_id": data["trace_id"],
+                "type": data["type"]
             })
 
     logger.info(f"Found {len(result)} total events/tickets with trace IDs")
