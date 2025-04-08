@@ -24,7 +24,7 @@ RUN chown -R nobody:nogroup /app
 USER nobody
 
 # Expose the application's port
-EXPOSE 8100
+EXPOSE 8120
 
 # Set the entrypoint and default command to run the Connexion application
 ENTRYPOINT ["python3"]
