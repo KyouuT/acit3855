@@ -58,6 +58,8 @@ services:
       - service
 
   receiver:
+    deploy:
+      replicas: 3
     build:
       context: Receiver
       dockerfile: Dockerfile
