@@ -65,6 +65,22 @@ def run_consistency_checks():
     storage_set = {(x["event_id"], x["trace_id"]) for x in s_ids}
 
     check_file = "./data/consistency/check.json"
+    default_check = {
+        "last_updated": datetime.utcnow().isoformat() + "Z",
+        "counts": {
+            "db": {},
+            "queue": {},
+            "processing": {}
+        },
+        "missing_in_db": [],
+        "missing_in_queue": []
+    }
+
+    if os.path.exists(check_file):
+        with open(check_file, 'r') as f:
+            results = json.load(f)
+    else:
+        results = default_check
 
     missing_in_db = []
     for eid, tid in analyzer_set - storage_set:
