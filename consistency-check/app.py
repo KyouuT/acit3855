@@ -57,6 +57,10 @@ def run_consistency_checks():
         a_ids = analyzer_ids.json()
     if storage_ids.status_code == 200:
         s_ids = storage_ids.json()
+    processing_data = processing_counts.json() if processing_counts.status_code == 200 else {"error": "unavailable"}
+    analyzer_count_data = analyzer_counts.json() if analyzer_counts.status_code == 200 else {"error": "unavailable"}
+    storage_count_data = storage_counts.json() if storage_counts.status_code == 200 else {"error": "unavailable"}
+    
     analyzer_set = {(x["event_id"], x["trace_id"]) for x in a_ids}
     storage_set = {(x["event_id"], x["trace_id"]) for x in s_ids}
 
@@ -75,13 +79,14 @@ def run_consistency_checks():
     results = {
         "last_updated": datetime.utcnow().isoformat() + "Z",
         "counts": {
-            "processing": processing_counts,
-            "queue": analyzer_counts,
-            "db": storage_counts
+            "processing": processing_data,
+            "queue": analyzer_count_data,
+            "db": storage_count_data
         },
         "missing_in_db": missing_in_db,
         "missing_in_queue": missing_in_queue
     }
+
     
     with open(check_file, 'w') as file:
         json.dump(results, file, indent=4)
