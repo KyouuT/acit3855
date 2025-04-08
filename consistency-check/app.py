@@ -98,11 +98,20 @@ def run_consistency_checks():
     return jsonify({"processing_time_ms": processing_time_ms}), 200
 
 def get_checks():
-    try:
-        with open(CHECK_PATH, "r") as f:
-            return jsonify(json.load(f)), 200
-    except FileNotFoundError:
-        return jsonify({"message": "No checks have been run yet"}), 404
+    logger.info("Request Received for consistency check")
+    check_file = CHECK_PATH
+
+    if os.path.exists(check_file):
+        with open(check_file, 'r') as f:
+            stats = json.load(f)
+    else:
+        logger.error("consistency check do not exist")
+        return {"message": "consistency checkdo not exist"}, 404
+    
+    logger.debug(f"consistency check: {stats}")
+    logger.info("Request for consistency check completed")
+
+    return stats, 200
 
 if __name__ == '__main__':
     app.run(port=8120, host="0.0.0.0")
