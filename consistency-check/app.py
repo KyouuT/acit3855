@@ -5,6 +5,7 @@ import os
 import yaml
 import logging.config
 import connexion
+import httpx
 from connexion.middleware import MiddlewarePosition 
 from starlette.middleware.cors import CORSMiddleware 
 
@@ -40,21 +41,16 @@ logging.config.dictConfig(LOG_CONFIG)
 
 logger = logging.getLogger("basicLogger")
 
-def fetch_json(url):
-    res = requests.get(url)
-    res.raise_for_status()
-    return res.json()
-
-def run_check():
+def run_consistency_checks():
     logger.info("Starting consistency check...")
     start = time.time()
 
     # Fetch data from all services
-    processing_counts = fetch_json(f"{APP_CONFIG['url']['processing']}")
-    analyzer_counts = fetch_json(f"{APP_CONFIG['url']['analyzer_counts']}")
-    analyzer_ids = fetch_json(f"{APP_CONFIG['url']['analyzer_ids']}")
-    storage_counts = fetch_json(f"{APP_CONFIG['url']['storage_counts']}")
-    storage_ids = fetch_json(f"{APP_CONFIG['url']['storage_ids']}")
+    processing_counts = httpx.get(f"{APP_CONFIG['url']['processing']}")
+    analyzer_counts = httpx.get(f"{APP_CONFIG['url']['analyzer_counts']}")
+    analyzer_ids = httpx.get(f"{APP_CONFIG['url']['analyzer_ids']}")
+    storage_counts = httpx.get(f"{APP_CONFIG['url']['storage_counts']}")
+    storage_ids = httpx.get(f"{APP_CONFIG['url']['storage_ids']}")
 
     # Build dictionaries for comparison
     analyzer_set = {(x["event_id"], x["trace_id"]) for x in analyzer_ids}
@@ -92,7 +88,7 @@ def run_check():
 
     return jsonify({"processing_time_ms": processing_time_ms}), 200
 
-def get_last_check():
+def get_checks():
     try:
         with open(CHECK_PATH, "r") as f:
             return jsonify(json.load(f)), 200
