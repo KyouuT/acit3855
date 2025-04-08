@@ -10,7 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 # API Setup
 app = connexion.FlaskApp(__name__, specification_dir='.')
-app.add_api('consistency_check.yml', base_path="/consistency", strict_validation=True, validate_responses=True)
+app.add_api('consistency_check.yaml', base_path="/consistency", strict_validation=True, validate_responses=True)
 if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes": 
     app.add_middleware( 
         CORSMiddleware, 
@@ -20,7 +20,7 @@ if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes":
         allow_methods=["*"], 
         allow_headers=["*"], 
     )
-    
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_CONFIG_PATH = os.path.join(BASE_DIR, "config", "test", "log_conf.yml")
 APP_CONFIG_PATH = os.path.join(BASE_DIR, "config", "test", "consistency_conf.yml")
