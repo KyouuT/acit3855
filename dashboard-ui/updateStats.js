@@ -1,5 +1,6 @@
 /* UPDATE THESE VALUES TO MATCH YOUR SETUP */
 
+const CONSISTENCY_API_URL = "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/consistency/update"
 const PROCESSING_STATS_API_URL = "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/processing/stats"
 const ANALYZER_API_URL = {
     stats: "http://ec2-54-213-238-135.us-west-2.compute.amazonaws.com/analyzer/stats",
@@ -50,5 +51,20 @@ const setup = () => {
     getStats()
     setInterval(() => getStats(), 4000) // Update every 4 seconds
 }
+
+const runConsistencyCheck = () => {
+    fetch(CONSISTENCY_API_URL, { method: "POST" })
+        .then(res => res.json())
+        .then((result) => {
+            console.log("Consistency check result: ", result);
+            updateCodeDiv(result, "consistency-check-result");
+        }).catch((error) => {
+            updateErrorMessages(error.message);
+        });
+}
+
+// Add event listener to the button
+document.getElementById("run-consistency-check-btn").addEventListener("click", runConsistencyCheck);
+
 
 document.addEventListener('DOMContentLoaded', setup)

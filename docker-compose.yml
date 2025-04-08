@@ -145,6 +145,26 @@ services:
     networks:
       - service
 
+  consistency_check:
+    build:
+      context: consistency-check
+      dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL: yes
+    restart: always
+    expose:
+      - "8120"
+    volumes:
+      - ./config/test:/app/config/test
+      - ./logs:/logs
+      - ./data/consistency:/app/data/consistency
+    depends_on:
+      - db
+      - processing
+      - analyzer
+    networks:
+      - service
+
 volumes:
   my-db:
 

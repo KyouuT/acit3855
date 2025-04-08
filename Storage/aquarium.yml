@@ -91,6 +91,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TicketBooking'
+
+  /stats:
+    get:
+      summary: Get count of tickets and events
+      operationId: app.get_stats
+      description: Get count of rows for each event type
+      responses:
+        '200':
+          description: Counts of ticket and event records
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  ticket_count: 120
+                  event_count: 45
+
+  /list:
+    get:
+      summary: Get event and ticket IDs with trace IDs
+      operationId: app.get_list
+      description: Get list of event_id and trace_id for each stored ticket and event
+      responses:
+        '200':
+          description: List of IDs and trace IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    event_id:
+                      type: string
+                    trace_id:
+                      type: string
 components:
   schemas:
     EventBooking:

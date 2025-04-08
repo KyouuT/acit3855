@@ -1,0 +1,7 @@
+version: 1
+url:
+  processing: http://processing/processing/stats
+  analyzer_counts: http://analyzer/analyzer/stats
+  analyzer_ids: http://analyzer/analyzer/list
+  storage_counts: http://storage/booking/stats
+  storage_ids: http://storage/booking/list

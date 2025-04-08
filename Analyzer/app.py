@@ -84,6 +84,24 @@ def get_booking_tickets(index):
 
     return {"message": f"No event found at index {index}!"}, 404
 
+def get_list():
+    """Return list of event_id and trace_id from Kafka messages"""
+    logger.info("Retrieving list of event and ticket IDs with trace IDs")
+    consumer = topic.get_simple_consumer(reset_offset_on_start=True, consumer_timeout_ms=1000)
+
+    result = []
+
+    for msg in consumer:
+        data = json.loads(msg.value.decode("utf-8"))
+        if "event_id" in data and "trace_id" in data:
+            result.append({
+                "event_id": data["event_id"],
+                "trace_id": data["trace_id"]
+            })
+
+    logger.info(f"Found {len(result)} total events/tickets with trace IDs")
+    return result, 200
+
 
 def get_stats():
     """Retrieve statistics for event1 and event2 counts"""

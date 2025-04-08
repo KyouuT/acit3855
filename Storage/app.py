@@ -132,6 +132,28 @@ def get_booking_events(session, start_timestamp:str, end_timestamp:str):
     # logger.info("Found %d event bookings (start: %s, end: %s)", len(results),start,end)
     return results
 
+@use_db_session
+def get_stats(session):
+    ticket_count = session.query(TicketBooking).count()
+    event_count = session.query(EventBooking).count()
+    return {
+        "ticket_count": ticket_count,
+        "event_count": event_count
+    }
+
+@use_db_session
+def get_list(session):
+    ticket_ids = session.query(TicketBooking.ticket_id, TicketBooking.trace_id).all()
+    event_ids = session.query(EventBooking.attraction_id, EventBooking.trace_id).all()
+
+    results = [
+        {"event_id": t[0], "trace_id": t[1]} for t in ticket_ids
+    ] + [
+        {"event_id": e[0], "trace_id": e[1]} for e in event_ids
+    ]
+    return results
+
+
 def process_messages():
     KAFKA_HOST = f"{APP_CONFIG['events']['hostname']}:{APP_CONFIG['events']['port']}"
     client = KafkaClient(hosts=KAFKA_HOST)
