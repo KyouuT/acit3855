@@ -81,20 +81,22 @@ def update_anomalies():
                 logger.warning(f"Anomaly detected: {payload['num_people']} people in ticket {payload['ticket_id']}")
                 results = {
                     "last_updated": datetime.utcnow().isoformat() + "Z",
-                    "UID": payload["ticket_id"],
-                    "TID": payload["trace_id"],
-                    "Type": msg["type"],
-                    "Description": f"Anomaly detected with {payload['num_people']} people."
+                    "event_id": payload["ticket_id"],
+                    "trace_id": payload["trace_id"],
+                    "event_type": msg["type"],
+                    "anomaly_type": "High People Count",
+                    "description": f"Anomaly detected with {payload['num_people']} people."
                 }
         elif msg["type"] == "event":
             if payload["num_people"] > event_threshold:
                 logger.warning(f"Anomaly detected: {payload['num_people']} people in event {payload['attraction_id']}")
                 results = {
                     "last_updated": datetime.utcnow().isoformat() + "Z",
-                    "UID": payload["attraction_id"],
-                    "TID": payload["trace_id"],
-                    "Type": msg["type"],
-                    "Description": f"Anomaly detected with {payload['num_people']} people."
+                    "event_id": payload["attraction_id"],
+                    "trace_id": payload["trace_id"],
+                    "event_type": msg["type"],
+                    "anomaly_type": "High People Count",
+                    "description": f"Anomaly detected with {payload['num_people']} people."
                 }
 
             with open(ANOMALY_PATH, 'w') as file:
