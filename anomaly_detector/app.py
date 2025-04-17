@@ -134,4 +134,4 @@ def get_anomalies(type):
     return filter_anomaly, 200
 
 if __name__ == '__main__':
-    app.run(port=8120, host="0.0.0.0")
+    app.run(port=8130, host="0.0.0.0")
