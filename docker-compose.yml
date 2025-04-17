@@ -167,6 +167,26 @@ services:
     networks:
       - service
 
+  anomaly_detector:
+    build:
+      context: anomaly_detector
+      dockerfile: Dockerfile
+    environment:
+      CORS_ALLOW_ALL: yes
+    restart: always
+    expose:
+      - "8130"
+    volumes:
+      - ./config/test:/app/config/test
+      - ./logs:/logs
+      - ./data/anomaly:/app/data/anomaly
+    depends_on:
+      - db
+      - processing
+      - analyzer
+    networks:
+      - service
+
 volumes:
   my-db:
 

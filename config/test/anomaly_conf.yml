@@ -1,0 +1,10 @@
+version: 1
+datastore: 
+  filename: anomaly.json
+events: 
+  hostname: kafka
+  port: 29092 
+  topic: events
+threshold: 
+  ticket: 30
+  attraction: 50
