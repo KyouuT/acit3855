@@ -122,9 +122,9 @@ def get_anomalies(event_type):
     if event_type is None:
         filter_anomaly = [anomaly]
     elif event_type == "ticket":
-        filter_anomaly = [anomaly] if anomaly["Type"] == "ticket" else []
+        filter_anomaly = [anomaly] if anomaly["event_type"] == "ticket" else []
     elif event_type == "event":
-        filter_anomaly = [anomaly] if anomaly["Type"] == "event" else []
+        filter_anomaly = [anomaly] if anomaly["event_type"] == "event" else []
 
     logger.debug(f"Filtered anomalies: {filter_anomaly}")
     logger.info(f"Anomalies of type {event_type}: {filter_anomaly}")
