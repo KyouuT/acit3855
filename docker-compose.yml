@@ -172,7 +172,7 @@ services:
       context: anomaly_detector
       dockerfile: Dockerfile
     environment:
-      - CORS_ALLOW_ALL: yes
+      CORS_ALLOW_ALL: yes
       # - ticket_threshold: 30
       # - event_threshold: 50
     restart: always
