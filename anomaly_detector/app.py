@@ -78,7 +78,7 @@ def update_anomalies():
         payload = msg["payload"]
         if msg["type"] == "ticket":
             if payload["num_people"] > ticket_threshold:
-                logger.warning(f"Anomaly detected: {msg['num_people']} people in ticket {msg['id']}")
+                logger.warning(f"Anomaly detected: {payload['num_people']} people in ticket {payload['ticket_id']}")
                 results = {
                     "last_updated": datetime.utcnow().isoformat() + "Z",
                     "UID": payload["ticket_id"],
@@ -88,7 +88,7 @@ def update_anomalies():
                 }
         elif msg["type"] == "event":
             if payload["num_people"] > event_threshold:
-                logger.warning(f"Anomaly detected: {msg['num_people']} people in event {msg['id']}")
+                logger.warning(f"Anomaly detected: {payload['num_people']} people in event {payload['attraction_id']}")
                 results = {
                     "last_updated": datetime.utcnow().isoformat() + "Z",
                     "UID": payload["attraction_id"],
