@@ -13,7 +13,7 @@ from pykafka.common import OffsetType
 
 # API Setup
 app = connexion.FlaskApp(__name__, specification_dir='.')
-app.add_api('consistency_check.yaml', base_path="/consistency", strict_validation=True, validate_responses=True)
+app.add_api('anomaly.yaml', base_path="/anomaly", strict_validation=True, validate_responses=True)
 if "CORS_ALLOW_ALL" in os.environ and os.environ["CORS_ALLOW_ALL"] == "yes": 
     app.add_middleware( 
         CORSMiddleware, 
