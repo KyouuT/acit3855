@@ -1,11 +1,11 @@
 /* UPDATE THESE VALUES TO MATCH YOUR SETUP */
 
-const CONSISTENCY_API_URL = "http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/consistency/update"
-const PROCESSING_STATS_API_URL = "http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/processing/stats"
+const CONSISTENCY_API_URL = "ec2-44-248-72-237.us-west-2.compute.amazonaws.com/consistency/update"
+const PROCESSING_STATS_API_URL = "ec2-44-248-72-237.us-west-2.compute.amazonaws.com/processing/stats"
 const ANALYZER_API_URL = {
-    stats: "http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/analyzer/stats",
-    events: "http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/analyzer/booking/attraction?index=25",
-    tickets: "http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/analyzer/buy/tickets?index=25"
+    stats: "ec2-44-248-72-237.us-west-2.compute.amazonaws.com/analyzer/stats",
+    events: "ec2-44-248-72-237.us-west-2.compute.amazonaws.com/analyzer/booking/attraction?index=25",
+    tickets: "ec2-44-248-72-237.us-west-2.compute.amazonaws.com/analyzer/buy/tickets?index=25"
 }
 
 // This function fetches and updates the general statistics
