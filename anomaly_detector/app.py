@@ -44,8 +44,9 @@ logging.config.dictConfig(LOG_CONFIG)
 logger = logging.getLogger("basicLogger")
 
 KAFKA_HOST = f"{APP_CONFIG['events']['hostname']}:{APP_CONFIG['events']['port']}"
+KAFKA_TOPIC = APP_CONFIG["events"]["topic"]
 client = KafkaClient(hosts=KAFKA_HOST)
-topic = client.topics[str.encode(f"{APP_CONFIG['events']['topic']}")]
+topic = client.topics[KAFKA_TOPIC.encode('utf-8')]
 
 def update_anomalies():
     logger.info("Starting anomaly detector...")
@@ -53,7 +54,11 @@ def update_anomalies():
     ticket_threshold = APP_CONFIG["threshold"]["ticket"]
     event_threshold = APP_CONFIG["threshold"]["attraction"]
 
-    consumer = topic.get_simple_consumer(reset_offset_on_start=True, consumer_timeout_ms=1000)
+    consumer = topic.get_simple_consumer(
+        consumer_group=b'event_group', 
+        reset_offset_on_start=False,
+        auto_offset_reset=OffsetType.LATEST
+    )
 
     anomaly_file = "./data/anomaly/anomaly.json"
     default_anomaly = {
