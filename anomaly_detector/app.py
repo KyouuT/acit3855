@@ -106,7 +106,7 @@ def update_anomalies():
 
 def get_anomalies(event_type):
     logger.info("Request Received for listing anomalies")
-    logger.debug(f"Request for anomalies of type: {type}")
+    logger.debug(f"Request for anomalies of type: {event_type}")
     check_file = ANOMALY_PATH
 
     if os.path.exists(check_file):
@@ -119,13 +119,13 @@ def get_anomalies(event_type):
     filter_anomaly = []
     if event_type is None:
         filter_anomaly = [anomaly]
-    elif type == "ticket":
+    elif event_type == "ticket":
         filter_anomaly = [anomaly] if anomaly["Type"] == "ticket" else []
-    elif type == "event":
+    elif event_type == "event":
         filter_anomaly = [anomaly] if anomaly["Type"] == "event" else []
 
     logger.debug(f"Filtered anomalies: {filter_anomaly}")
-    logger.info(f"Anomalies of type {type}: {filter_anomaly}")
+    logger.info(f"Anomalies of type {event_type}: {filter_anomaly}")
 
     return filter_anomaly, 200
 
