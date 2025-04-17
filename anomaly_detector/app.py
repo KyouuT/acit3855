@@ -110,7 +110,7 @@ def update_anomalies():
 
     return jsonify({}), 200
 
-def get_anomalies(type):
+def get_anomalies(event_type):
     logger.info("Request Received for listing anomalies")
     logger.debug(f"Request for anomalies of type: {type}")
     check_file = ANOMALY_PATH
