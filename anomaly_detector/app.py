@@ -54,11 +54,7 @@ def update_anomalies():
     ticket_threshold = APP_CONFIG["threshold"]["ticket"]
     event_threshold = APP_CONFIG["threshold"]["attraction"]
 
-    consumer = topic.get_simple_consumer(
-        consumer_group=b'event_group', 
-        reset_offset_on_start=False,
-        auto_offset_reset=OffsetType.LATEST
-    )
+    consumer = topic.get_simple_consumer(reset_offset_on_start=True, consumer_timeout_ms=1000)
 
     anomaly_file = "./data/anomaly/anomaly.json"
     default_anomaly = {
