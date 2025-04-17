@@ -173,8 +173,8 @@ services:
       dockerfile: Dockerfile
     environment:
       - CORS_ALLOW_ALL: yes
-      - ticket_threshold: 30
-      - event_threshold: 50
+      # - ticket_threshold: 30
+      # - event_threshold: 50
     restart: always
     expose:
       - "8130"
