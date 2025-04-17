@@ -123,7 +123,9 @@ def get_anomalies(event_type):
         return {"message": "anomaly list do not exist"}, 404
     
     filter_anomaly = []
-    if type == "ticket":
+    if event_type is None:
+        filter_anomaly = [anomaly]
+    elif type == "ticket":
         filter_anomaly = [anomaly] if anomaly["Type"] == "ticket" else []
     elif type == "event":
         filter_anomaly = [anomaly] if anomaly["Type"] == "event" else []
