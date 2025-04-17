@@ -1,7 +1,7 @@
 version: 1
 url:
-  processing: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/processing/stats
-  analyzer_counts: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/analyzer/stats
-  analyzer_ids: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/analyzer/list
-  storage_counts: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage/stats
-  storage_ids: http://ec2-54-213-158-194.us-west-2.compute.amazonaws.com/storage/list
+  processing: http://ec2-44-248-72-237.us-west-2.compute.amazonaws.com/processing/stats
+  analyzer_counts: http://ec2-44-248-72-237.us-west-2.compute.amazonaws.com/analyzer/stats
+  analyzer_ids: http://ec2-44-248-72-237.us-west-2.compute.amazonaws.com/analyzer/list
+  storage_counts: http://ec2-44-248-72-237.us-west-2.compute.amazonaws.com/storage/stats
+  storage_ids: http://ec2-44-248-72-237.us-west-2.compute.amazonaws.com/storage/list
