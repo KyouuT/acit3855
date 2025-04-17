@@ -100,7 +100,6 @@ def update_anomalies():
             with open(ANOMALY_PATH, 'w') as file:
                 json.dump(results, file, indent=4)
 
-        consumer.commit_offsets() 
         logger.info("Message processed and committed.")
 
     return jsonify({}), 200
